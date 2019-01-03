@@ -63,7 +63,7 @@ function main() {
                 authorizeButton.style.display = 'none';
                 signoutButton.style.display = 'block';
 
-                listLabels();
+                fetchEmails();
             } else {
                 authorizeButton.style.display = 'block';
                 signoutButton.style.display = 'none';
@@ -100,17 +100,108 @@ function main() {
          * Print all Labels in the authorized user's inbox. If no labels
          * are found an appropriate message is printed.
          */
-        function listLabels() {
+        function fetchEmails() {
+
+            // get emails ids  
             gapi.client.gmail.users.messages.list({
-                'userId': 'me'
+                'userId': 'me',
+                'maxResults': 5
             }).then(function (response) {
-                let messagesIds = response.result.messages;
-                id = messagesIds[0].id;
-                console.log(id);
-                gapi.client.gmail.users.messages.get({ 'userId': 'me', 'id': id }).then(function (msg) {
-                    console.log(msg);
+                let msgIds = response.result.messages;
+
+
+                var batch = gapi.client.newBatch();
+
+                // add multiple requests for each email using its id
+                msgIds.forEach(msgId => {
+                    var req = gapi.client.gmail.users.messages.get({
+                        'userId': 'me',
+                        'id': msgId.id
+                    });
+
+                    batch.add(req);
+                });
+
+                batch.then(function (response) {
+                    // process the messages 
+
+                    var rawMsgs = response.result;
+                    var msgs = [];
+                    console.log(rawMsgs);
+
+                    // iterate over each element in the rawMsgs object
+                    $.each(rawMsgs, (key, rawMsg) => {
+
+                        // what info to extract
+                        var msg = {
+                            labels: [],
+                            subject: '',
+                            body: '',
+                            sender: '',
+                            receiver: '',
+                            date: ''
+                        };
+
+                        var payload = rawMsg.result.payload;
+
+                        msg.labels = rawMsg.result.labelIds;
+                        msg.subject = getHeader(payload.headers, 'Subject');
+                        msg.sender = getHeader(payload.headers, 'From');
+                        msg.receiver = getHeader(payload.headers, 'To');
+                        msg.date = getHeader(payload.headers, 'Date');
+                        msg.body = getBody(payload);
+                        console.log(msg);
+                    });
+
                 })
+
             });
+
+            function getBody(payload) {
+                var encodedBody = '';
+                // if we have one part (just the body)
+                if (typeof payload.parts === 'undefined') {
+                    encodedBody = payload.body.data;
+                }
+                else {
+                    encodedBody = getHTMLPart(payload.parts);
+                }
+                encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+                return decodeURIComponent(escape(window.atob(encodedBody)));
+            }
+
+            function getHeader(headers, headerStr) {
+                var header = '';
+                $.each(headers, function () {
+                    if (this.name === headerStr) {
+                        header = this.value;
+                    }
+                });
+                return header;
+            }
+
+
+            // recursive parser that can handle multiple nested parts
+            function getHTMLPart(parts) {
+
+                console.log(parts);
+                for (let i = 0; i < parts.length; i++) {
+                    const part = parts[i];
+
+                    // check if we don't have nested parts
+                    if (typeof part.parts === 'undefined') {
+                        // return the html part only
+                        if (part.mimeType === 'text/html') {
+                            return part.body.data;
+                        }
+                    } else {
+                        // apply the function again on the other parts
+                        getHTMLPart(part.parts);
+                    }
+
+                }
+
+            }
         }
 
     }
