@@ -17,17 +17,45 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md">
+    <div class="container-fluid">
+        <div class="row" id="row">
+            <div class="col-md" style="display: none">
 
-                <!--Add buttons to initiate auth sequence and sign out-->
+                <!-- Add buttons to initiate auth sequence and sign out -->
                 <button id="authorize_button" style="display: none;">Authorize</button>
                 <button id="signout_button" style="display: none;">Sign Out</button>
 
                 <pre id="content" style="white-space: pre-wrap;"></pre>
 
+
+
             </div>
+
+            <div class="col-md-4" class="navbar" id="emailData">
+                <div class="row" id="emailRow">
+                    <div class="col-md-12">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body" id="emailCard">
+                                
+                                <h5 class="card-title" id="subject">Card title  </h5>
+                                <p style="float:right" id="date">1/1</p>
+                                <h6 class="card-subtitle mb-2 text-muted" id="sender" >Card subtitle</h6>
+                                <p class="card-text" id="snippet">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8" id="baseBody">
+                <p id="subjectP">subject</p>
+            </div>
+
+
+
+
 
         </div>
     </div>
@@ -41,7 +69,6 @@
 
     <script src="js/main.js"></script>
     <script src="cred/cred.js"></script>
-
 
 </body>
 

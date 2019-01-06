@@ -2,7 +2,7 @@ $(document).ready(main);
 
 
 function main() {
-
+    var msgs = [];
     const CLIENT_ID = CRED.client_id;
     const API_KEY = CRED.api_key;
     // Array of API discovery doc URLs for APIs used by the quickstart
@@ -12,6 +12,29 @@ function main() {
     var signoutButton = document.getElementById('signout_button');
 
 
+
+    function displayMsgs(msgs) {
+        var $emailCol = $("#emailData");
+        var $emailRow = $("#emailRow");
+
+        msgs.forEach((msg, i) => {
+            var $emailRowClone = $emailRow.clone();
+            $emailRowClone.attr('id', 'emailRow-' + i);
+            // console.log($emailRowClone);
+            $emailRowClone.find('#subject').text(msg.subject);
+            $emailRowClone.find('#date').text(msg.date);
+            $emailRowClone.find('#sender').text(msg.sender);
+            // $emailRowClone.find('#sender').text(msg.sender);
+
+
+            $emailCol.append($emailRowClone);
+        });
+        $emailRow.hide();
+
+
+
+
+    }
 
     { // api code
 
@@ -126,7 +149,7 @@ function main() {
                     // process the messages 
 
                     var rawMsgs = response.result;
-                    var msgs = [];
+
                     console.log(rawMsgs);
 
                     // iterate over each element in the rawMsgs object
@@ -151,7 +174,9 @@ function main() {
                         msg.date = getHeader(payload.headers, 'Date');
                         msg.body = getBody(payload);
                         console.log(msg);
+                        msgs.push(msg);
                     });
+                    displayMsgs(msgs);
 
                 })
 
