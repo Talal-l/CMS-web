@@ -14,27 +14,26 @@ function main() {
 
 
     function displayMsgs(msgs) {
-        var $sender = $("#senderP").clone();
-        var $date = $("#dateP").clone();
-        var $subject = $("#subjectP").clone();
-        var $body = $("#bodyP").clone();
-        var $row = $("#row");
-        var $div = $("#emailData").clone();
+        var $emailCol = $("#emailData");
+        var $emailRow = $("#emailRow");
 
-        for (var i = 0; i < msgs.length; i++) {
-
-
-            $div.append($sender);
-            $div.append($date);
-            $div.append($subject);
-            $row.append($div);
+        msgs.forEach((msg, i) => {
+            var $emailRowClone = $emailRow.clone();
+            $emailRowClone.attr('id', 'emailRow-' + i);
+            // console.log($emailRowClone);
+            $emailRowClone.find('#subject').text(msg.subject);
+            $emailRowClone.find('#date').text(msg.date);
+            $emailRowClone.find('#sender').text(msg.sender);
+            // $emailRowClone.find('#sender').text(msg.sender);
 
 
-            $sender.text(msgs[i].sender);
-            $date.text(msgs[i].date);
-            $subject.text(msgs[i].subject);
-            // $body.text(msgs[i].body);
-        }
+            $emailCol.append($emailRowClone);
+        });
+        $emailRow.hide();
+
+
+
+
     }
 
     { // api code
