@@ -29,7 +29,9 @@ function main() {
             // $emailRowClone.find('#sender').text(msg.sender);
             $emailCol.append($emailRowClone);
             $emailRowClone.click(function(){
-                $body.find('#subjectP').text(msg.body);
+                var $ifram = $('#bodyIfram');
+                $ifram.attr('srcdoc',msg.body);
+                $body.append($ifram);
                 
                 
             });
