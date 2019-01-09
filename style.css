@@ -1,0 +1,5 @@
+
+.wrapper{
+    display: grid;
+    grid-template-columns: 5fr 10fr;
+}
