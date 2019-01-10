@@ -1,16 +1,26 @@
+* {
+    box-sizing: border-box;
+  }
 
 .wrapper{
     display: grid;
-    grid-template-columns: repeat(6,1fr)
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 
+    'header header'
+    'msgList msgBody' 
+    
+
 }
 
 .headerBar{
-    grid-column: 1/7;
-    grid-row: 1/1;
+    grid-area: header;
+    display:inline-block;
+
+
 }
 .msgList{
-    grid-column: 1/2
+    grid-area: msgList;
 }
 .msgBody{
-    grid-column: span 5;
+    grid-area: msgBody;
 }
