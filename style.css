@@ -1,5 +1,16 @@
 
 .wrapper{
     display: grid;
-    grid-template-columns: 5fr 10fr;
+    grid-template-columns: repeat(6,1fr)
+}
+
+.headerBar{
+    grid-column: 1/7;
+    grid-row: 1/1;
+}
+.msgList{
+    grid-column: 1/2
+}
+.msgBody{
+    grid-column: span 5;
 }

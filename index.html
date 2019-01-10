@@ -20,18 +20,18 @@
 
 <body>
     <div class="wrapper">
-        <div class="col-md" style="display: none">
+        <div class="headerBar">
 
             <!-- Add buttons to initiate auth sequence and sign out -->
-            <button id="authorize_button" style="display: none;">Authorize</button>
-            <button id="signout_button" style="display: none;">Sign Out</button>
+            <button id="authorize_button">Authorize</button>
+            <button id="signout_button">Sign Out</button>
 
             <pre id="content" style="white-space: pre-wrap;"></pre>
 
 
 
         </div>
-        <div id="emailData">
+        <div class="msgList" id="emailData">
             <div class="row" id="emailRow">
                 <div class="col-md-12">
                     <div class="card" style="width: 18rem;">
@@ -50,7 +50,7 @@
 
         </div>
 
-        <div id="baseBody">
+        <div class="msgBody" id="baseBody">
             <p id="subjectP">subject</p>
             <iframe id="bodyIfram" style="width:100%; height:100%">
             </iframe>
