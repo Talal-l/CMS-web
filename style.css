@@ -14,7 +14,6 @@
 
 .headerBar{
     grid-area: header;
-    display:inline-block;
 
 
 }
@@ -23,4 +22,7 @@
 }
 .msgBody{
     grid-area: msgBody;
+}
+.bodyHeaderBar{
+    border-color: black;
 }

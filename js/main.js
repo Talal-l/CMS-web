@@ -28,12 +28,12 @@ function main() {
             $emailRowClone.find('#sender').text(msg.sender);
             // $emailRowClone.find('#sender').text(msg.sender);
             $emailCol.append($emailRowClone);
-            $emailRowClone.click(function(){
+            $emailRowClone.click(function () {
                 var $ifram = $('#bodyIfram');
-                $ifram.attr('srcdoc',msg.body);
+                $ifram.attr('srcdoc', msg.body);
                 $body.append($ifram);
-                
-                
+
+
             });
 
 
@@ -42,13 +42,31 @@ function main() {
         });
         $emailRow.hide();
 
-        
-       
 
+        // event handlers 
+        {
+            function onMsgAccept() {
+                // change the label of the msg and its color
+
+                $(this).labels.push
+
+
+                
+
+
+
+            };
+            function onMsgReject() {
+                // show bootstrap modal with text box confirming 
+
+
+
+            };
+        }
 
     }
 
-    
+
 
     { // api code
 
