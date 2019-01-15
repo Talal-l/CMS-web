@@ -30,3 +30,13 @@
 .card-active{
     background-color: antiquewhite;
 }
+
+.card-accepted{
+    background-color: green;
+
+}
+
+.card-new{
+    background-color: blue;
+
+}

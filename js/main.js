@@ -55,16 +55,17 @@ function main() {
         function onMsgAccept() {
             // change the label of the msg and its color
 
-            $(this).labels.push
-
-
-
-
+            $(this).labels.push('didReceive');
+            $(this).addClass('card-accepted');
 
 
         };
         function onMsgReject() {
             // show bootstrap modal with text box confirming 
+
+            $(this).labels.push('rejected');
+            $(this).removeClass('card-accepted');
+
 
 
 
