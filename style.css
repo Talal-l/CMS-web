@@ -15,6 +15,9 @@
 .headerBar{
     grid-area: header;
 
+    text-align:center;
+
+
 
 }
 .msgList{
@@ -26,3 +29,21 @@
 .bodyHeaderBar{
     border-color: black;
 }
+
+.navBar{
+    float: left;
+    text-align:center;
+}
+
+.moreOptionBtn{
+    float: right;
+}
+
+/* add button in the header bar */
+/* Bootstrap css */
+/* @import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"; */
+
+/* Propeller button */
+/* @import "http://propeller.in/components/button/css/button.css"; */
+
+
