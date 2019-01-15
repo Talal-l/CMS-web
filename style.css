@@ -35,6 +35,9 @@
     background-color: green;
 
 }
+.card-rejected{
+    background-color: red;
+}
 
 .card-new{
     background-color: blue;
