@@ -15,56 +15,62 @@ function main() {
 
     function displayMsgs(msgs) {
         var $emailCol = $("#emailData");
-        var $emailRow = $("#emailRow");
-        var $body = $("#baseBody");
         var $emailCard = $('#emailCard');
+        var $body = $("#baseBody");
+        var selectedEmailCardId = null;
 
         msgs.forEach((msg, i) => {
-            var $emailRowClone = $emailRow.clone();
-            $emailRowClone.attr('id', 'emailRow-' + i);
-            // console.log($emailRowClone);
-            $emailRowClone.find('#subject').text(msg.subject);
-            $emailRowClone.find('#date').text(msg.date);
-            $emailRowClone.find('#sender').text(msg.sender);
-            // $emailRowClone.find('#sender').text(msg.sender);
-            $emailCol.append($emailRowClone);
-            $emailRowClone.click(function () {
-                var $ifram = $('#bodyIfram');
-                $ifram.attr('srcdoc', msg.body);
-                $body.append($ifram);
+            var $emailCardClone = $emailCard.clone();
+            $emailCardClone.attr('id', 'emailCard-' + i);
+            // console.log($emailCardClone);
+            $emailCardClone.find('#subject').text(msg.subject);
+            $emailCardClone.find('#date').text(msg.date);
+            $emailCardClone.find('#sender').text(msg.sender);
+            // $emailCardClone.find('#sender').text(msg.sender);
+            $emailCol.append($emailCardClone);
 
+            // card click
+            $emailCardClone.click(function () {
+                if (selectedEmailCardId !== $(this).attr('id') || selectedEmailCardId === null) {
 
+                    var $ifram = $('#bodyIfram');
+                    $ifram.attr('srcdoc', msg.body);
+                    $body.append($ifram);
+
+                    $(this).toggleClass("card-active");
+                    $("#" + selectedEmailCardId).toggleClass("card-active");
+
+                    selectedEmailCardId = $(this).attr('id');
+                }
             });
-
-
-
-
         });
-        $emailRow.hide();
+        $emailCard.hide();
 
-
-        // event handlers 
-        {
-            function onMsgAccept() {
-                // change the label of the msg and its color
-
-                $(this).labels.push
-
-
-                
+    };
 
 
 
-            };
-            function onMsgReject() {
-                // show bootstrap modal with text box confirming 
+    // event handlers 
+    {
+        function onMsgAccept() {
+            // change the label of the msg and its color
+
+            $(this).labels.push
 
 
 
-            };
-        }
 
+
+
+        };
+        function onMsgReject() {
+            // show bootstrap modal with text box confirming 
+
+
+
+        };
     }
+
 
 
 
@@ -116,11 +122,11 @@ function main() {
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
                 authorizeButton.style.display = 'none';
-                signoutButton.style.display = 'block';
+                signoutButton.style.display = "inline";
 
                 fetchEmails();
             } else {
-                authorizeButton.style.display = 'block';
+                authorizeButton.style.display = 'inline';
                 signoutButton.style.display = 'none';
             }
         }
@@ -262,4 +268,5 @@ function main() {
         }
 
     }
+
 }

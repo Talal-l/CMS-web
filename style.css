@@ -26,3 +26,7 @@
 .bodyHeaderBar{
     border-color: black;
 }
+
+.card-active{
+    background-color: antiquewhite;
+}
