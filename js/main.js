@@ -11,17 +11,20 @@ function main() {
     var authorizeButton = document.getElementById('authorize_button');
     var signoutButton = document.getElementById('signout_button');
 
+    // keep track of selected msg
+    var selectedEmailCardId = null;
 
 
     function displayMsgs(msgs) {
         var $emailCol = $("#emailData");
         var $emailCard = $('#emailCard');
         var $body = $("#baseBody");
-        var selectedEmailCardId = null;
 
         msgs.forEach((msg, i) => {
             var $emailCardClone = $emailCard.clone();
-            $emailCardClone.attr('id', 'emailCard-' + i);
+            var emailCardId = 'emailCard-' + i;
+            $emailCardClone.data(msg);
+            $emailCardClone.attr('id', emailCardId);
             // console.log($emailCardClone);
             $emailCardClone.find('#subject').text(msg.subject);
             $emailCardClone.find('#date').text(msg.date);
@@ -52,24 +55,34 @@ function main() {
 
     // event handlers 
     {
-        function onMsgAccept() {
+        $("#acceptBtn").click(function () {
             // change the label of the msg and its color
+            var originalMsg = $('#' + selectedEmailCardId).data();
 
-            $(this).labels.push('didReceive');
-            $(this).addClass('card-accepted');
+            if (originalMsg !== undefined && !($('#' + selectedEmailCardId).hasClass('card-accepted'))) {
 
+                originalMsg.labels.push("didReceive");
+                console.log(originalMsg.labels);
+                $("#" + selectedEmailCardId).addClass('card-accepted');
+                $("#" + selectedEmailCardId).removeClass('card-rejected');
+            }
 
-        };
-        function onMsgReject() {
+        });
+        $("#rejectBtn").click(function () {
             // show bootstrap modal with text box confirming 
 
-            $(this).labels.push('rejected');
-            $(this).removeClass('card-accepted');
+            var originalMsg = $('#' + selectedEmailCardId).data();
 
+            if (originalMsg !== undefined && !($('#' + selectedEmailCardId).hasClass('card-rejected'))) {
 
+                originalMsg.labels.push("rejected");
+                console.log(originalMsg.labels);
+                $("#" + selectedEmailCardId).addClass('card-rejected');
+                $("#" + selectedEmailCardId).removeClass('card-accepted');
 
+            }
+        });
 
-        };
     }
 
 
