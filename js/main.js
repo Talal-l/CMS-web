@@ -11,60 +11,80 @@ function main() {
     var authorizeButton = document.getElementById('authorize_button');
     var signoutButton = document.getElementById('signout_button');
 
+    // keep track of selected msg
+    var selectedEmailCardId = null;
 
 
     function displayMsgs(msgs) {
         var $emailCol = $("#emailData");
-        var $emailRow = $("#emailRow");
-        var $body = $("#baseBody");
         var $emailCard = $('#emailCard');
+        var $body = $("#baseBody");
 
         msgs.forEach((msg, i) => {
-            var $emailRowClone = $emailRow.clone();
-            $emailRowClone.attr('id', 'emailRow-' + i);
-            // console.log($emailRowClone);
-            $emailRowClone.find('#subject').text(msg.subject);
-            $emailRowClone.find('#date').text(msg.date);
-            $emailRowClone.find('#sender').text(msg.sender);
-            // $emailRowClone.find('#sender').text(msg.sender);
-            $emailCol.append($emailRowClone);
-            $emailRowClone.click(function () {
-                var $ifram = $('#bodyIfram');
-                $ifram.attr('srcdoc', msg.body);
-                $body.append($ifram);
+            var $emailCardClone = $emailCard.clone();
+            var emailCardId = 'emailCard-' + i;
+            $emailCardClone.data(msg);
+            $emailCardClone.attr('id', emailCardId);
+            // console.log($emailCardClone);
+            $emailCardClone.find('#subject').text(msg.subject);
+            $emailCardClone.find('#date').text(msg.date);
+            $emailCardClone.find('#sender').text(msg.sender);
+            // $emailCardClone.find('#sender').text(msg.sender);
+            $emailCol.append($emailCardClone);
 
+            // card click
+            $emailCardClone.click(function () {
+                if (selectedEmailCardId !== $(this).attr('id') || selectedEmailCardId === null) {
 
+                    var $ifram = $('#bodyIfram');
+                    $ifram.attr('srcdoc', msg.body);
+                    $body.append($ifram);
+
+                    $(this).toggleClass("card-active");
+                    $("#" + selectedEmailCardId).toggleClass("card-active");
+
+                    selectedEmailCardId = $(this).attr('id');
+                }
             });
+        });
+        $emailCard.hide();
+
+    };
 
 
 
+    // event handlers 
+    {
+        $("#acceptBtn").click(function () {
+            // change the label of the msg and its color
+            var originalMsg = $('#' + selectedEmailCardId).data();
+
+            if (originalMsg !== undefined && !($('#' + selectedEmailCardId).hasClass('card-accepted'))) {
+
+                originalMsg.labels.push("didReceive");
+                console.log(originalMsg.labels);
+                $("#" + selectedEmailCardId).addClass('card-accepted');
+                $("#" + selectedEmailCardId).removeClass('card-rejected');
+            }
 
         });
-        $emailRow.hide();
+        $("#rejectBtn").click(function () {
+            // show bootstrap modal with text box confirming 
 
+            var originalMsg = $('#' + selectedEmailCardId).data();
 
-        // event handlers 
-        {
-            function onMsgAccept() {
-                // change the label of the msg and its color
+            if (originalMsg !== undefined && !($('#' + selectedEmailCardId).hasClass('card-rejected'))) {
 
-                $(this).labels.push
+                originalMsg.labels.push("rejected");
+                console.log(originalMsg.labels);
+                $("#" + selectedEmailCardId).addClass('card-rejected');
+                $("#" + selectedEmailCardId).removeClass('card-accepted');
 
-
-                
-
-
-
-            };
-            function onMsgReject() {
-                // show bootstrap modal with text box confirming 
-
-
-
-            };
-        }
+            }
+        });
 
     }
+
 
 
 
@@ -120,7 +140,7 @@ function main() {
 
                 fetchEmails();
             } else {
-                authorizeButton.style.display = 'block';
+                authorizeButton.style.display = 'inline';
                 signoutButton.style.display = 'none';
             }
         }
@@ -262,4 +282,5 @@ function main() {
         }
 
     }
+
 }
