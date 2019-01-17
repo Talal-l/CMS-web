@@ -48,7 +48,6 @@ function main() {
             });
         });
         $emailCard.hide();
-
     };
 
 
@@ -58,6 +57,10 @@ function main() {
         $("#acceptBtn").click(function () {
             // change the label of the msg and its color
             var originalMsg = $('#' + selectedEmailCardId).data();
+            // console.log(originalMsg);
+
+
+            
 
             if (originalMsg !== undefined && !($('#' + selectedEmailCardId).hasClass('card-accepted'))) {
 
@@ -214,7 +217,8 @@ function main() {
                             body: '',
                             sender: '',
                             receiver: '',
-                            date: ''
+                            date: '', 
+                            rejectedReason: ''
                         };
 
                         var payload = rawMsg.result.payload;
@@ -282,5 +286,24 @@ function main() {
         }
 
     }
+
+    $sendEmailBtn=$("#sendEmailBtn");
+    $rejectionMessageText=$("#message-text");
+
+    
+$sendEmailBtn.click( function(){
+    var originalMsg = $('#' + selectedEmailCardId).data();
+if(originalMsg !== undefined ){
+    //var x = document.getElementById("message-text").value;
+    //msgs.rejectedReason= x;
+    //console.log(msgs.rejectedReason);
+    originalMsg.rejectedReason=$rejectionMessageText.val();
+    console.log(originalMsg.rejectedReason);
+    console.log(originalMsg);
+    document.getElementById("message-text").value = "";
+    $rejectionMessageText.value="";
+}
+
+});
 
 }
