@@ -30,7 +30,7 @@
            
             <div class="btn-group btn-group-justified " role="group" aria-label="..." >
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" id ="upload_btn">Uploads</button>
+                  <button type="button" class="btn btn-default" id ="upload_btn">Uploads</button>
                 </div>
                 <div class="btn-group" role="group">
                   <button type="button" class="btn btn-default" id ="message_btn">Messages</button>
@@ -42,13 +42,76 @@
 
 
         </div>
+        <div class="msgList" id="emailData">
+            <div class="row" id="emailRow">
+                <div class="col-md-12">
+                    <div class="card" id="emailCard">
+                        <div class="card-body">
 
-        <h1> report page</h1>
+                            <h5 class="card-title" id="subject">Card title </h5>
+                            <p style="float:right" id="date">1/1</p>
+                            <h6 class="card-subtitle mb-2 text-muted" id="sender">Card subtitle</h6>
+                            <p class="card-text" id="snippet">Some quick example text to build on the card title
+                                and make up the
+                                bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="msgBody" id="baseBody">
+            <div class="bodyHeaderBar">
+                    <h1> report page</h1>
+            <!-- <button class="btn btn-primary" id="acceptBtn" >
+                Accept
+            </button>
+            <button class="btn btn-danger" id="rejectBtn" data-toggle="modal" data-target="#exampleModal" >
+                Reject
+            </button> -->
+
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Rejection Reason</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                       
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Enter rejection reason.</label>
+                          <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      
+                      <button id="sendEmailBtn" type="button" class="btn btn-primary">Send Email</button>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+
+
+            </div>
+            <!-- <iframe id="bodyIfram" style="width:100%; height:100%">
+            </iframe> -->
+
+        </div>
+
+        
       
 
        
 
     </div>
+
 
 
 

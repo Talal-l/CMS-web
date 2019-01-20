@@ -31,6 +31,19 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   })
   */
 
-// more options button js
+// date picker  js
+{
+
+    var date_input=$('input[name="date"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso1 form').length>0 ? $('.bootstrap-iso1 form').parent() : "body";
+    var options={
+      format: 'mm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+      
+    };
+    date_input.datepicker(options);
+  }
 
 }

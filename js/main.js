@@ -300,7 +300,6 @@ if(originalMsg !== undefined ){
     originalMsg.rejectedReason=$rejectionMessageText.val();
     console.log(originalMsg.rejectedReason);
     console.log(originalMsg);
-    document.getElementById("message-text").value = "";
     $rejectionMessageText.value="";
 }
 
