@@ -18,6 +18,7 @@ document.getElementById("report_btn").onclick = function (){
 
 
 
+
 //reject button modal javaScript in home page (index.html)
 /*
 $('#exampleModal').on('show.bs.modal', function (event) {
@@ -34,7 +35,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 // date picker  js
 {
 
-    var date_input=$('input[name="date"]'); //our date input has the name "date"
+    var date_input=$('input[name="upload"]'); //our date input has the name "date"
     var container=$('.bootstrap-iso1 form').length>0 ? $('.bootstrap-iso1 form').parent() : "body";
     var options={
       format: 'mm/dd/yyyy',

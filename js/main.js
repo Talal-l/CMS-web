@@ -305,4 +305,11 @@ if(originalMsg !== undefined ){
 
 });
 
+$addUpload = $("#addUpload");
+$addRequestForm = $("#addRequestForm");
+$addUpload.click( function(){
+    $addRequestForm.show();
+})
+
+
 }
