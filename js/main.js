@@ -17,7 +17,10 @@ function main() {
     var selectedEmailCardId = null;
 
 
+
     function displayMsgs(msgs) {
+    console.log("acceptedmsg");
+    console.log(acceptedMsgs);
         var $emailCol = $("#emailData");
         var $emailCard = $('#emailCard');
         var $body = $("#baseBody");
@@ -27,11 +30,19 @@ function main() {
             var emailCardId = 'emailCard-' + i;
             $emailCardClone.data(msg);
             $emailCardClone.attr('id', emailCardId);
-            // console.log($emailCardClone);
             $emailCardClone.find('#subject').text(msg.subject);
             $emailCardClone.find('#date').text(msg.date);
             $emailCardClone.find('#sender').text(msg.sender);
-            // $emailCardClone.find('#sender').text(msg.sender);
+
+            acceptedMsgs.some((acceptedMsg) => {
+                if (msg.id === acceptedMsg.id){
+                    $emailCardClone.addClass('card-accepted');
+                    return true;
+                }
+                return false;
+            });
+
+
             $emailCol.append($emailCardClone);
 
             // card click
@@ -217,6 +228,7 @@ function main() {
                         var payload = rawMsg.result.payload;
                         // what info to extract
                         var msg = {
+                            id: rawMsg.result.id,
                             labels: rawMsg.result.labelIds,
                             subject: getHeader(payload.headers, 'Subject'),
                             body: getBody(payload),
