@@ -226,7 +226,7 @@ function main() {
                             rejectedReason: ''
                         };
                         console.log(msg);
-                        msgs[key] = msg;
+                        msgs.push(msg);
                     });
                     displayMsgs(msgs);
 
