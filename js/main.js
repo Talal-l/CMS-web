@@ -19,8 +19,8 @@ function main() {
 
 
     function displayMsgs(msgs) {
-    console.log("acceptedmsg");
-    console.log(acceptedMsgs);
+        console.log("acceptedmsg");
+        console.log(acceptedMsgs);
         var $emailCol = $("#emailData");
         var $emailCard = $('#emailCard');
         var $body = $("#baseBody");
@@ -34,8 +34,9 @@ function main() {
             $emailCardClone.find('#date').text(msg.date);
             $emailCardClone.find('#sender').text(msg.sender);
 
+            // search in accepted msgs for the current msg 
             acceptedMsgs.some((acceptedMsg) => {
-                if (msg.id === acceptedMsg.id){
+                if (msg.id === acceptedMsg.id) {
                     $emailCardClone.addClass('card-accepted');
                     return true;
                 }
