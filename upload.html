@@ -69,7 +69,6 @@
                             <h5 class="card-title" id="requester">requester</h5>
                             <!-- <p style="float:right" id="type">1/1</p> -->
                             <h6 class="card-subtitle mb-2 text-muted" id="type">type</h6>
-                            <p class="card-text" id="requestedDate">date</p>
                         </div>
                     </div>
                 </div>
@@ -89,11 +88,11 @@
                     
                                         <label class="control-label">type:</label>
                                         <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="requestTypeBtn"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 type
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <div class="dropdown-menu" aria-labelledby="requestTypeBtn">
                                                 <a class="dropdown-item" href="#">Action</a>
                                                 <a class="dropdown-item" href="#">Another action</a>
                                                 <a class="dropdown-item" href="#">Something else here</a>
@@ -101,16 +100,16 @@
                                         </div>
                     
                                         <label class="control-label">count:</label>
-                                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        <input type="number" class="form-control" id="requestCount" aria-describedby="emailHelp"
                                             placeholder="numbers only">
                     
                                         <label class="control-label">requesting party:</label>
                                         <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="requestParty"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 requesting party
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <div class="dropdown-menu" aria-labelledby="requestParty">
                                                 <a class="dropdown-item" href="#">Action</a>
                                                 <a class="dropdown-item" href="#">Another action</a>
                                                 <a class="dropdown-item" href="#">Something else here</a>
@@ -130,10 +129,6 @@
                                                                 <!-- <label class="control-label" for="date">Date</label> -->
                                                                 <input class="form-control" id="requestedDate" name="requestedDate" placeholder="MM/DD/YYY"
                                                                     type="text" />
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <!-- Submit button -->
-                                                                <!-- <button class="btn btn-primary " name="submit" type="button">Submit</button> -->
                                                             </div>
                                                         </form>
                                                         <!-- Form code ends -->
@@ -157,7 +152,7 @@
                                                             <div class="form-group">
                                                                 <!-- Date input -->
                                                                 <!-- <label class="control-label" for="date">Date</label> -->
-                                                                <input class="form-control" id="uploadDate" name="uploadDate" placeholder="MM/DD/YYY"
+                                                                <input class="form-control" id="requestUploadDate" name="uploadDate" placeholder="MM/DD/YYY"
                                                                     type="text" />
                                                             </div>
                                                             <div class="form-group">
@@ -174,7 +169,7 @@
                     
                     
                                         <label class="control-label">via:</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <input type="text" class="form-control" id="requestMethod" aria-describedby="requestMethod">
                     
                                     </div>
                                     <div class="checkbox">
@@ -184,7 +179,7 @@
                                         </label>
                                     </div>
                                     <br>
-                                    <button class="btn btn-primary " id="modalSubmitBtn" name="button" type="button">Submit</button>
+                                    <button class="btn btn-primary " id="modalSubmitBtn" name="button" type="submit">Submit</button>
                     
                                 </div>
                      </div>

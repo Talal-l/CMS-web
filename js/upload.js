@@ -3,6 +3,24 @@ $(document).ready(main);
 function main() {
 
     var acceptedMsgs = JSON.parse(localStorage.getItem('acceptedMsgs')) || [];
+
+    class Request {
+        constructor() {
+            this.type = '';
+            this.count = -1;
+            this.requestingParty = '';
+            this.requestDate = '';
+            this.uploadDate = '';
+            this.requestMethod = ''; // via whatsapp, in-person, etc
+        }
+    }
+
+    requests = []; // all requests, whether they came from eamil or another source
+
+
+
+
+
     displayMsgs(acceptedMsgs);
 
 
@@ -54,6 +72,30 @@ function main() {
 
 
 
+
+
+    // event handlers 
+    {
+
+
+        // on modal submit
+        $('#modalSubmitBtn').click(function () {
+
+            var newRequest = new Request();
+            newRequest.type = $('#requestTypeBtn').text();
+            newRequest.count = $('#requestCount').val();
+            newRequest.requestingParty = $('#requestParty').val();
+            newRequest.requestDate = $('#requestedDate').val();
+            newRequest.requestMethod = $('#requestMethod').val();
+
+            console.log("request");
+            console.log(newRequest);
+
+
+        });
+
+
+    }
 
 
 
