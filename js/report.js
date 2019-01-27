@@ -35,7 +35,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 // date picker  js
 {
 
-    var date_input=$('input[name="upload"]'); //our date input has the name "date"
+    var date_input=$('input[name="requestedDate"]'); //our date input has the name "date"
     var container=$('.bootstrap-iso1 form').length>0 ? $('.bootstrap-iso1 form').parent() : "body";
     var options={
       format: 'mm/dd/yyyy',
@@ -45,6 +45,19 @@ $('#exampleModal').on('show.bs.modal', function (event) {
       
     };
     date_input.datepicker(options);
+    
   }
+  //get the value of the date picker
+  $modalSubmitBtn=$("#modalSubmitBtn");
+  $modalSubmitBtn.click( function(){
+    $requestDateInput =$("#requestedDate");
+    
+    
+  });
+  
+
+
+
+  
 
 }

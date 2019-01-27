@@ -38,7 +38,7 @@
                 <button id="authorize_button">Authorize</button>
                 <button id="signout_button">Sign Out</button>
                 <button type="button" class="btn btn-primary bmd-btn-fab">
-                    <i class="material-icons" id="addUpload">+</i>
+                    <i class="material-icons" id="addUpload" data-toggle="modal" data-target="#myModal">+</i>
                 </button>
             </div>
 
@@ -78,106 +78,123 @@
         </div>
 
         <div class="msgBody" id="baseBody">
-            <div id="addRequestForm" style="display: none;">
-                <div class="bodyHeaderBar">
-                    <!-- <h1> upload page</h1> -->
+            <div class="modal fade" id="myModal" role="dialog">
+    
+                <div class="modal-dialog">
 
-                    <label class="control-label">type:</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            type
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-
-                    <label class="control-label">count:</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="numbers only">
-
-                    <label class="control-label">requesting party:</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            requesting party
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                    <label class="control-label">requested date:</label>
-
-                    <div class="bootstrap-iso">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                    <!-- Form code begins -->
-                                    <form method="post">
-                                        <div class="form-group">
-                                            <!-- Date input -->
-                                            <!-- <label class="control-label" for="date">Date</label> -->
-                                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
-                                                type="text" />
-                                        </div>
-                                        <div class="form-group">
-                                            <!-- Submit button -->
-                                            <!-- <button class="btn btn-primary " name="submit" type="button">Submit</button> -->
-                                        </div>
-                                    </form>
-                                    <!-- Form code ends -->
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <label class="control-label">upload date: </label>
-                    <div class="bootstrap-iso">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                    <!-- Form code begins -->
-                                    <form method="post">
-                                        <div class="form-group">
-                                            <!-- Date input -->
-                                            <!-- <label class="control-label" for="date">Date</label> -->
-                                            <input class="form-control" id="date" name="upload" placeholder="MM/DD/YYY"
-                                                type="text" />
-                                        </div>
-                                        <div class="form-group">
-                                            <!-- Submit button -->
-                                            <!-- <button class="btn btn-primary " name="submit" type="button">Submit</button> -->
-                                        </div>
-                                    </form>
-                                    <!-- Form code ends -->
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                     <div class="modal-content">
+                            <div id="addRequestForm" style="display: none;">
+                                    <div class="bodyHeaderBar">
+                                        <!-- <h1> upload page</h1> -->
                     
-                    <label class="control-label">via:</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-
+                                        <label class="control-label">type:</label>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                type
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
+                    
+                                        <label class="control-label">count:</label>
+                                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            placeholder="numbers only">
+                    
+                                        <label class="control-label">requesting party:</label>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                requesting party
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
+                                        <label class="control-label">requested date:</label>
+                    
+                                        <div class="bootstrap-iso">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    
+                                                        <!-- Form code begins -->
+                                                        <form method="post">
+                                                            <div class="form-group">
+                                                                <!-- Date input -->
+                                                                <!-- <label class="control-label" for="date">Date</label> -->
+                                                                <input class="form-control" id="requestedDate" name="requestedDate" placeholder="MM/DD/YYY"
+                                                                    type="text" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <!-- Submit button -->
+                                                                <!-- <button class="btn btn-primary " name="submit" type="button">Submit</button> -->
+                                                            </div>
+                                                        </form>
+                                                        <!-- Form code ends -->
+                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                    
+                    
+                    
+                                        <label class="control-label">upload date: </label>
+                                        <div class="bootstrap-iso">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    
+                                                        <!-- Form code begins -->
+                                                        <form method="post">
+                                                            <div class="form-group">
+                                                                <!-- Date input -->
+                                                                <!-- <label class="control-label" for="date">Date</label> -->
+                                                                <input class="form-control" id="uploadDate" name="uploadDate" placeholder="MM/DD/YYY"
+                                                                    type="text" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <!-- Submit button -->
+                                                                <!-- <button class="btn btn-primary " name="submit" type="button">Submit</button> -->
+                                                            </div>
+                                                        </form>
+                                                        <!-- Form code ends -->
+                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                    
+                                        <label class="control-label">via:</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="toggle-one" type="checkbox" data-toggle="toggle">
+                                            send upload email to requester
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <button class="btn btn-primary " id="modalSubmitBtn" name="button" type="button">Submit</button>
+                    
+                                </div>
+                     </div>
+                    
                 </div>
-                <br>
-                <button class="btn btn-primary " name="button" type="button">Submit</button>
-
             </div>
-
         
+           
+
+
         </div>
 
 
