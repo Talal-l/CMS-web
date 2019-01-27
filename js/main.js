@@ -3,6 +3,8 @@ $(document).ready(main);
 
 function main() {
     var msgs = [];
+    // array of msg that have been accepted
+    var acceptedMsgs = JSON.parse(localStorage.getItem('acceptedMsgs')) || [];
     const CLIENT_ID = CRED.client_id;
     const API_KEY = CRED.api_key;
     // Array of API discovery doc URLs for APIs used by the quickstart
@@ -15,7 +17,10 @@ function main() {
     var selectedEmailCardId = null;
 
 
+
     function displayMsgs(msgs) {
+        console.log("acceptedmsg");
+        console.log(acceptedMsgs);
         var $emailCol = $("#emailData");
         var $emailCard = $('#emailCard');
         var $body = $("#baseBody");
@@ -25,11 +30,20 @@ function main() {
             var emailCardId = 'emailCard-' + i;
             $emailCardClone.data(msg);
             $emailCardClone.attr('id', emailCardId);
-            // console.log($emailCardClone);
             $emailCardClone.find('#subject').text(msg.subject);
             $emailCardClone.find('#date').text(msg.date);
             $emailCardClone.find('#sender').text(msg.sender);
-            // $emailCardClone.find('#sender').text(msg.sender);
+
+            // search in accepted msgs for the current msg 
+            acceptedMsgs.some((acceptedMsg) => {
+                if (msg.id === acceptedMsg.id) {
+                    $emailCardClone.addClass('card-accepted');
+                    return true;
+                }
+                return false;
+            });
+
+
             $emailCol.append($emailCardClone);
 
             // card click
@@ -51,23 +65,25 @@ function main() {
     };
 
 
-
     // event handlers 
     {
         $("#acceptBtn").click(function () {
-            // change the label of the msg and its color
+
+            // get the msg object of the currently selected msg
             var originalMsg = $('#' + selectedEmailCardId).data();
-            // console.log(originalMsg);
+            console.log(originalMsg);
 
-
-            
-
+            // mark as accepted the msg is defined and has not been accepted yey
             if (originalMsg !== undefined && !($('#' + selectedEmailCardId).hasClass('card-accepted'))) {
 
                 originalMsg.labels.push("didReceive");
                 console.log(originalMsg.labels);
                 $("#" + selectedEmailCardId).addClass('card-accepted');
                 $("#" + selectedEmailCardId).removeClass('card-rejected');
+
+                // add msg to accepted msgs array
+                acceptedMsgs.push(originalMsg);
+                localStorage.setItem('acceptedMsgs', JSON.stringify(acceptedMsgs));
             }
 
         });
@@ -210,25 +226,18 @@ function main() {
                     // iterate over each element in the rawMsgs object
                     $.each(rawMsgs, (key, rawMsg) => {
 
+                        var payload = rawMsg.result.payload;
                         // what info to extract
                         var msg = {
-                            labels: [],
-                            subject: '',
-                            body: '',
-                            sender: '',
-                            receiver: '',
-                            date: '', 
+                            id: rawMsg.result.id,
+                            labels: rawMsg.result.labelIds,
+                            subject: getHeader(payload.headers, 'Subject'),
+                            body: getBody(payload),
+                            sender: getHeader(payload.headers, 'From'),
+                            receiver: getHeader(payload.headers, 'To'),
+                            date: getHeader(payload.headers, 'Date'),
                             rejectedReason: ''
                         };
-
-                        var payload = rawMsg.result.payload;
-
-                        msg.labels = rawMsg.result.labelIds;
-                        msg.subject = getHeader(payload.headers, 'Subject');
-                        msg.sender = getHeader(payload.headers, 'From');
-                        msg.receiver = getHeader(payload.headers, 'To');
-                        msg.date = getHeader(payload.headers, 'Date');
-                        msg.body = getBody(payload);
                         console.log(msg);
                         msgs.push(msg);
                     });
@@ -287,29 +296,29 @@ function main() {
 
     }
 
-    $sendEmailBtn=$("#sendEmailBtn");
-    $rejectionMessageText=$("#message-text");
+    $sendEmailBtn = $("#sendEmailBtn");
+    $rejectionMessageText = $("#message-text");
 
-    
-$sendEmailBtn.click( function(){
-    var originalMsg = $('#' + selectedEmailCardId).data();
-if(originalMsg !== undefined ){
-    //var x = document.getElementById("message-text").value;
-    //msgs.rejectedReason= x;
-    //console.log(msgs.rejectedReason);
-    originalMsg.rejectedReason=$rejectionMessageText.val();
-    console.log(originalMsg.rejectedReason);
-    console.log(originalMsg);
-    $rejectionMessageText.value="";
-}
 
-});
+    $sendEmailBtn.click(function () {
+        var originalMsg = $('#' + selectedEmailCardId).data();
+        if (originalMsg !== undefined) {
+            //var x = document.getElementById("message-text").value;
+            //msgs.rejectedReason= x;
+            //console.log(msgs.rejectedReason);
+            originalMsg.rejectedReason = $rejectionMessageText.val();
+            console.log(originalMsg.rejectedReason);
+            console.log(originalMsg);
+            $rejectionMessageText.value = "";
+        }
 
-$addUpload = $("#addUpload");
-$addRequestForm = $("#addRequestForm");
-$addUpload.click( function(){
-    $addRequestForm.show();
-})
+    });
+
+    $addUpload = $("#addUpload");
+    $addRequestForm = $("#addRequestForm");
+    $addUpload.click(function () {
+        $addRequestForm.show();
+    })
 
 
 }
