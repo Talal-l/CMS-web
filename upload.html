@@ -78,119 +78,100 @@
 
         <div class="msgBody" id="baseBody">
             <div class="modal fade" id="myModal" role="dialog">
-    
+
                 <div class="modal-dialog">
 
-                     <div class="modal-content">
-                            <div id="addRequestForm" style="display: none;">
-                                    <div class="bodyHeaderBar">
-                                        <!-- <h1> upload page</h1> -->
-                    
-                                        <label class="control-label">type:</label>
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="requestTypeBtn"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                type
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="requestTypeBtn">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
-                    
-                                        <label class="control-label">count:</label>
-                                        <input type="number" class="form-control" id="requestCount" aria-describedby="emailHelp"
-                                            placeholder="numbers only">
-                    
-                                        <label class="control-label">requesting party:</label>
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="requestParty"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                requesting party
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="requestParty">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
-                                        <label class="control-label">requested date:</label>
-                    
-                                        <div class="bootstrap-iso">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                    
-                                                        <!-- Form code begins -->
-                                                        <form method="post">
-                                                            <div class="form-group">
-                                                                <!-- Date input -->
-                                                                <!-- <label class="control-label" for="date">Date</label> -->
-                                                                <input class="form-control" id="requestedDate" name="requestedDate" placeholder="MM/DD/YYY"
-                                                                    type="text" />
-                                                            </div>
-                                                        </form>
-                                                        <!-- Form code ends -->
-                    
+                    <div class="modal-content">
+                        <div id="addRequestForm" style="display: none;">
+                            <div class="bodyHeaderBar">
+                                <!-- <h1> upload page</h1> -->
+
+                                <label class="control-label">type:</label>
+                                <select class="form-control" id="requestType">
+                                    <option>default</option>
+                                    <option>op1</option>
+                                    <option>op2</option>
+                                </select>
+
+
+                                <label class="control-label">count:</label>
+                                <input type="number" class="form-control" id="requestCount" aria-describedby="requestCount"
+                                    placeholder="numbers only">
+
+
+                                <label class="control-label">requesting party:</label>
+                                <input type="text" class="form-control" id="requestParty" aria-describedby="requestParty">
+
+
+                                <label class="control-label">requested date:</label>
+                                <div class="bootstrap-iso">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                <!-- Form code begins -->
+                                                <form method="post">
+                                                    <div class="form-group">
+                                                        <!-- Date input -->
+                                                        <!-- <label class="control-label" for="date">Date</label> -->
+                                                        <input class="form-control" id="requestedDate" name="requestedDate"
+                                                            placeholder="MM/DD/YYY" type="text" />
                                                     </div>
-                                                </div>
+                                                </form>
+                                                <!-- Form code ends -->
+
                                             </div>
                                         </div>
-                    
-                    
-                    
-                    
-                                        <label class="control-label">upload date: </label>
-                                        <div class="bootstrap-iso">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                    
-                                                        <!-- Form code begins -->
-                                                        <form method="post">
-                                                            <div class="form-group">
-                                                                <!-- Date input -->
-                                                                <!-- <label class="control-label" for="date">Date</label> -->
-                                                                <input class="form-control" id="requestUploadDate" name="uploadDate" placeholder="MM/DD/YYY"
-                                                                    type="text" />
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <!-- Submit button -->
-                                                                <!-- <button class="btn btn-primary " name="submit" type="button">Submit</button> -->
-                                                            </div>
-                                                        </form>
-                                                        <!-- Form code ends -->
-                    
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                    
-                    
-                                        <label class="control-label">via:</label>
-                                        <input type="text" class="form-control" id="requestMethod" aria-describedby="requestMethod">
-                    
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input id="toggle-one" type="checkbox" data-toggle="toggle">
-                                            send upload email to requester
-                                        </label>
-                                    </div>
-                                    <br>
-                                    <button class="btn btn-primary " id="modalSubmitBtn" name="button" type="submit">Submit</button>
-                    
                                 </div>
-                     </div>
-                    
+
+
+
+
+                                <label class="control-label">upload date: </label>
+                                <div class="bootstrap-iso">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                <!-- Form code begins -->
+                                                <form method="post">
+                                                    <div class="form-group">
+                                                        <input class="form-control" id="uploadDate" name="uploadDate"
+                                                            placeholder="MM/DD/YYY" type="text" />
+                                                    </div>
+                                                </form>
+                                                <!-- Form code ends -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="control-label">via:</label>
+                            <input type="text" class="form-control" id="requestMethod" aria-describedby="requestMethod">
+
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input id="toggle-one" type="checkbox" data-toggle="toggle">
+                                send upload email to requester
+                            </label>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary " id="modalSubmitBtn" name="button" type="submit">Submit</button>
+
+                    </div>
                 </div>
+
             </div>
-        
-           
-
-
         </div>
+
+
+
+
+    </div>
 
 
 

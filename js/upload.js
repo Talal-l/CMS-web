@@ -82,7 +82,7 @@ function main() {
         $('#modalSubmitBtn').click(function () {
 
             var newRequest = new Request();
-            newRequest.type = $('#requestTypeBtn').text();
+            newRequest.type = $('#requestType').val();
             newRequest.count = $('#requestCount').val();
             newRequest.requestingParty = $('#requestParty').val();
             newRequest.requestDate = $('#requestedDate').val();
