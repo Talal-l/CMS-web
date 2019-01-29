@@ -20,8 +20,35 @@ function main() {
 
 
 
-
     displayMsgs(acceptedMsgs);
+
+
+    // set date picker for request and upload date
+
+    setDataPicker("requestDate");
+    setDataPicker("uploadDate");
+
+    function setDataPicker(inputFieldName) {
+
+        // make this less awkward
+
+        var date_input=$('input[name="requestedDate"]'); //our date input has the name "date"
+        var inputHtml = `input[name="${inputFieldName}"]`;
+        console.log(inputHtml);
+
+
+        var date_input = $(inputHtml); // get the input field related to the picker
+        var container = $('.bootstrap-iso1 form').length > 0 ? $('.bootstrap-iso1 form').parent() : "body";
+        var options = {
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+
+        };
+
+        date_input.datepicker(options);
+    }
 
 
     function displayMsgs(msgs) {
@@ -85,7 +112,8 @@ function main() {
             newRequest.type = $('#requestType').val();
             newRequest.count = $('#requestCount').val();
             newRequest.requestingParty = $('#requestParty').val();
-            newRequest.requestDate = $('#requestedDate').val();
+            newRequest.requestDate = $('#requestDate').val();
+            newRequest.uploadDate= $('#uploadDate').val();
             newRequest.requestMethod = $('#requestMethod').val();
 
             console.log("request");
