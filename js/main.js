@@ -122,9 +122,6 @@ function main() {
         gapi.load('client:auth2', initClient);
 
 
-
-
-
         // what permissions to ask from the user
         // requested permissions read data send messages handle labels 
         var SCOPES =
