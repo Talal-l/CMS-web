@@ -23,24 +23,24 @@
         <div class="headerBar">
 
             <!-- Add buttons to initiate auth sequence and sign out -->
-            <div  class="navBar">
-                    <button id="authorize_button">Authorize</button>
-                    <button id="signout_button">Sign Out</button>
+            <div class="navBar">
+                <button id="authorize_button">Authorize</button>
+                <button id="signout_button">Sign Out</button>
             </div>
-           
-            <div class="btn-group btn-group-justified " role="group" aria-label="..." >
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" id ="upload_btn">Uploads</button>
-                </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default" id ="message_btn">Messages</button>
-                </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default" id ="report_btn">Reports</button>
-                </div>
-              </div>
 
-            
+            <div class="btn-group btn-group-justified " role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" id="upload_btn">Uploads</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" id="message_btn">Messages</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" id="report_btn">Reports</button>
+                </div>
+            </div>
+
+
 
         </div>
         <div class="msgList" id="emailData">
@@ -51,8 +51,10 @@
 
                             <h5 class="card-title" id="subject">Card title </h5>
                             <p style="float:right" id="date">1/1</p>
-                            <h6 class="card-subtitle mb-2 text-muted" id="sender">Card subtitle</h6>
-                            <p class="card-text" id="snippet">Some quick example text to build on the card title
+                            <h6 class="card-subtitle mb-2 text-muted" id="sender">Card
+                                subtitle</h6>
+                            <p class="card-text" id="snippet">Some quick
+                                example text to build on the card title
                                 and make up the
                                 bulk of the card's content.</p>
                         </div>
@@ -64,38 +66,42 @@
 
         <div class="msgBody" id="baseBody">
             <div class="bodyHeaderBar">
-            <button class="btn btn-primary" id="acceptBtn" >
-                Accept
-            </button>
-            <button class="btn btn-danger" id="rejectBtn" data-toggle="modal" data-target="#exampleModal" >
-                Reject
-            </button>
+                <button class="btn btn-primary" id="acceptBtn">
+                    Accept
+                </button>
+                <button class="btn btn-danger" id="rejectBtn" data-toggle="modal" data-target="#exampleModal">
+                    Reject
+                </button>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Rejection Reason</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                       
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Enter rejection reason.</label>
-                          <textarea class="form-control" id="message-text"></textarea>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Rejection
+                                    Reason</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Enter
+                                            rejection reason.</label>
+                                        <textarea class="form-control" id="message-text"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button id="sendEmailBtn" type="button" class="btn btn-primary">Send
+                                    Email</button>
+                            </div>
                         </div>
-                      </form>
                     </div>
-                    <div class="modal-footer">
-                      
-                      <button id="sendEmailBtn" type="button" class="btn btn-primary">Send Email</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
 
 
 

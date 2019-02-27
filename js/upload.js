@@ -53,15 +53,17 @@ function main() {
             $emailCol.append($emailCardClone);
 
             // card click
-            $emailCardClone.click(function () {
-                if (selectedEmailCardId !== $(this).attr('id') || selectedEmailCardId === null) {
+            $emailCardClone.click(function() {
+                if (selectedEmailCardId !== $(this).attr('id') ||
+                    selectedEmailCardId === null) {
 
                     var $ifram = $('#bodyIfram');
                     $ifram.attr('srcdoc', msg.body);
                     $body.append($ifram);
 
                     $(this).toggleClass("card-active");
-                    $("#" + selectedEmailCardId).toggleClass("card-active");
+                    $("#" + selectedEmailCardId).toggleClass(
+                        "card-active");
 
                     selectedEmailCardId = $(this).attr('id');
                 }
@@ -79,7 +81,7 @@ function main() {
 
 
         // on modal submit
-        $('#modalSubmitBtn').click(function () {
+        $('#modalSubmitBtn').click(function() {
 
             var newRequest = new Request();
             newRequest.type = $('#requestTypeBtn').text();
