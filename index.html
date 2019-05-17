@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
+    <title>inbox</title>
     <!--bootstrap dependency-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -15,12 +17,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 
-    <!--import the gapi object to use in our code-->
-    <script src="https://apis.google.com/js/api.js"></script>
 
-    <script src="cred/cred.js"></script>
-
-    <script src="js/checkLogin.js" charset="utf-8"></script>
 
 </head>
 
@@ -30,7 +27,6 @@
 
             <!-- Add buttons to initiate auth sequence and sign out -->
             <div class="navBar">
-                <button id="authorize_button">Authorize</button>
                 <button id="signout_button">Sign Out</button>
             </div>
 
@@ -122,6 +118,9 @@
 
 
     <!--code-->
+    <!--import the gapi object to use in our code-->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="cred/cred.js"></script>
 
     <script src="js/main.js"></script>
     <script src="js/report.js"></script>
