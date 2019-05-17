@@ -7,6 +7,10 @@ function main() {
     var acceptedMsgs = JSON.parse(localStorage.getItem('acceptedMsgs')) || [];
     const CLIENT_ID = CRED.client_id;
     const API_KEY = CRED.api_key;
+
+    var headerBar = document.getElementById("headerBar");
+    var emailData = document.getElementById("emailData");
+    var baseBody = document.getElementById("baseBody");
     // Array of API discovery doc URLs for APIs used by the quickstart
     var DISCOVERY_DOCS = [
         "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"
@@ -67,6 +71,7 @@ function main() {
         });
         $emailCard.hide();
     };
+    
 
 
     // event handlers 
@@ -204,6 +209,14 @@ function main() {
          * are found an appropriate message is printed.
          */
         function fetchEmails() {
+           
+            headerBar.style.display = "none";
+            emailData.style.display = "none";
+            baseBody.style.display = "none";
+            
+            loaderDiv.innerHTML = `<div class="spinner-border text-primary m-5" style="width: 10rem; height: 10rem;" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>`;
 
             // get emails ids  
             gapi.client.gmail.users.messages.list({
@@ -260,7 +273,10 @@ function main() {
                         msgs.push(msg);
                     });
                     displayMsgs(msgs);
-
+                    loaderDiv.innerHTML = `<h1> </h1>`;
+                    headerBar.style.display = "block";
+                    emailData.style.display = "block";
+                    baseBody.style.display = "block";
                 })
 
             });
