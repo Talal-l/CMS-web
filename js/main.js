@@ -6,7 +6,23 @@ var DISCOVERY_DOCS = [
 
 // keep track of selected msg
 var selectedEmailCardId = null;
+    var msgs = [];
+    // array of msg that have been accepted
+    var acceptedMsgs = JSON.parse(localStorage.getItem('acceptedMsgs')) || [];
 
+    var headerBar = document.getElementById("headerBar");
+    var emailData = document.getElementById("emailData");
+    var baseBody = document.getElementById("baseBody");
+    // Array of API discovery doc URLs for APIs used by the quickstart
+    var DISCOVERY_DOCS = [
+        "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"
+    ];
+
+    var authorizeButton = document.getElementById('authorize_button');
+    var signoutButton = document.getElementById('signout_button');
+
+    // keep track of selected msg
+    var selectedEmailCardId = null;
 
 // what permissions to ask from the user
 // requested permissions read data send messages handle labels 
@@ -29,8 +45,6 @@ gapi.load('client:auth2', function () {
 
         console.log(gapi);
         fetchEmails();
-
-
         // inside the call back to make sure we are using the initialized gapi object
         var signoutButton = document.getElementById('signout_button');
         signoutButton.onclick = function (event) {
@@ -146,14 +160,16 @@ function displayMsgs(msgs,acceptedMsgs) {
 }
 
 
-
-
-
 function fetchEmails() {
-
-
+    headerBar.style.display = "none";
+    emailData.style.display = "none";
+    baseBody.style.display = "none";
+    
+    loaderDiv.innerHTML = `<div class="spinner-border text-primary m-5" style="width: 10rem; height: 10rem;" role="status">
+    <span class="sr-only">Loading...</span>
+    </div>`;
     var msgs = [];
-    var acceptedMsgs = JSON.parse(localStorage.getItem('acceptedMsgs')) || [];
+
     // get emails ids  
     gapi.client.gmail.users.messages.list({
         'userId': 'me',
@@ -172,96 +188,93 @@ function fetchEmails() {
                     'id': msgId.id
                 });
             console.log(req);
-
             batch.add(req);
         });
+                batch.then(function(response) {
+                    // process the messages 
 
-        batch.then(function (response) {
-            // process the messages 
+                    var rawMsgs = response.result;
 
-            var rawMsgs = response.result;
+                    console.log(rawMsgs);
 
-            console.log(rawMsgs);
+                    // iterate over each element in the rawMsgs object
+                    $.each(rawMsgs, (key, rawMsg) => {
 
-            // iterate over each element in the rawMsgs object
-            $.each(rawMsgs, (key, rawMsg) => {
-
-                var payload = rawMsg.result.payload;
-                // what info to extract
-                var msg = {
-                    id: rawMsg.result.id,
-                    labels: rawMsg.result.labelIds,
-                    subject: getHeader(
-                        payload.headers,
-                        'Subject'),
-                    body: getBody(payload),
-                    sender: getHeader(
-                        payload.headers,
-                        'From'),
-                    receiver: getHeader(
-                        payload.headers,
-                        'To'),
-                    date: getHeader(
-                        payload.headers,
-                        'Date'),
-                    rejectedReason: ''
-                };
-                console.log(msg);
-                msgs.push(msg);
-            });
-            displayMsgs(msgs,acceptedMsgs);
-
-        })
-
+                        var payload = rawMsg.result.payload;
+                        // what info to extract
+                        var msg = {
+                            id: rawMsg.result.id,
+                            labels: rawMsg.result.labelIds,
+                            subject: getHeader(
+                                payload.headers,
+                                'Subject'),
+                            body: getBody(payload),
+                            sender: getHeader(
+                                payload.headers,
+                                'From'),
+                            receiver: getHeader(
+                                payload.headers,
+                                'To'),
+                            date: getHeader(
+                                payload.headers,
+                                'Date'),
+                            rejectedReason: ''
+                        };
+                        console.log(msg);
+                        msgs.push(msg);
+                    });
+                    displayMsgs(msgs,acceptedMsgs);
+                    loaderDiv.innerHTML = `<h1> </h1>`;
+                    headerBar.style.display = "block";
+                    emailData.style.display = "block";
+                    baseBody.style.display = "block";
+                })
     });
 
-    function getBody(payload) {
-        var encodedBody = '';
-        // if we have one part (just the body)
-        if (typeof payload.parts === 'undefined') {
-            encodedBody = payload.body.data;
-        } else {
-            encodedBody = getHTMLPart(payload.parts);
+}
+
+function getBody(payload) {
+    var encodedBody = '';
+    // if we have one part (just the body)
+    if (typeof payload.parts === 'undefined') {
+        encodedBody = payload.body.data;
+    } else {
+        encodedBody = getHTMLPart(payload.parts);
+    }
+    encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/')
+        .replace(/\s/g, '');
+    return decodeURIComponent(escape(window.atob(encodedBody)));
+}
+
+function getHeader(headers, headerStr) {
+    var header = '';
+    $.each(headers, function () {
+        if (this.name === headerStr) {
+            header = this.value;
         }
-        encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/')
-            .replace(/\s/g, '');
-        return decodeURIComponent(escape(window.atob(encodedBody)));
-    }
+    });
+    return header;
+}
 
-    function getHeader(headers, headerStr) {
-        var header = '';
-        $.each(headers, function () {
-            if (this.name === headerStr) {
-                header = this.value;
+// recursive parser that can handle multiple nested parts
+function getHTMLPart(parts) {
+    console.log(parts);
+    for (let i = 0; i < parts.length; i++) {
+        const part = parts[i];
+
+        // check if we don't have nested parts
+        if (typeof part.parts === 'undefined') {
+            // return the html part only
+            if (part.mimeType === 'text/html') {
+                return part.body.data;
             }
-        });
-        return header;
-    }
-
-
-    // recursive parser that can handle multiple nested parts
-    function getHTMLPart(parts) {
-
-        console.log(parts);
-        for (let i = 0; i < parts.length; i++) {
-            const part = parts[i];
-
-            // check if we don't have nested parts
-            if (typeof part.parts === 'undefined') {
-                // return the html part only
-                if (part.mimeType === 'text/html') {
-                    return part.body.data;
-                }
-            } else {
-                // apply the function again on the other parts
-                getHTMLPart(part.parts);
-            }
-
+        } else {
+            // apply the function again on the other parts
+            getHTMLPart(part.parts);
         }
 
     }
 }
-
 
 $sendEmailBtn = $("#sendEmailBtn");
 $rejectionMessageText = $("#message-text");

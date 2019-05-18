@@ -3,6 +3,7 @@
   }
 
 .wrapper{
+    /* visibility: hidden; */
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-areas: 
@@ -10,6 +11,20 @@
     'msgList msgBody' 
     
 
+}
+
+#headerBar{
+    visibility: visible;
+    display: none;
+}
+
+#emailData{
+    visibility: visible;
+    display: none;
+}
+#baseBody{
+    visibility: visible;
+    display: none;
 }
 
 .headerBar{
